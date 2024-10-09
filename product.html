@@ -5,15 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
-
-<!-- {
-  "require": {
-    "nesbot/carbon": "^2.43"
-  }
-} -->
 
 <body>
     <header>
@@ -28,20 +21,20 @@
     </header>
 
     <main>
-        <h1 style="color: black;" id="product-name"></h1>
+        <h1 id="product-name"></h1>
         <img id="product-image" src="" alt="Product Image" style="width: 200px; height: auto;">
-        <p style="color: black;" id="product-description"></p>
+        <p id="product-description"></p>
         <p id="product-price" style="font-size: 1.5em; color: yellow;"></p>
-        <!-- <button id="addToCartBtn">Add to Cart</button> -->
-
-        <!-- Hidden form for phone number input -->
-        <form action="MpesaProcessor.php" method="POST" id="phoneForm"  margin-top: 20px;">
-            <label for="phoneNumber">Enter your phone number for payment:</label>
-            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required>
         <label for="quantity">Quantity:</label>
         <input type="number" id="quantity" name="quantity" min="1" value="1">
+        <button id="addToCartBtn">Add to Cart</button>
+
+        <!-- Hidden form for phone number input -->
+        <div id="phoneForm" style="display: none; margin-top: 20px;">
+            <label for="phoneNumber">Enter your phone number for payment:</label>
+            <input type="text" id="phoneNumber" placeholder="Phone Number" required>
             <button id="confirmAddToCartBtn">Confirm</button>
-</form>
+        </div>
     </main>
 
     <footer>
@@ -61,15 +54,40 @@
             document.getElementById('product-price').textContent = price;
         });
 
-       /*  document.getElementById('addToCartBtn').onclick = function () {
+        document.getElementById('addToCartBtn').onclick = function () {
             document.getElementById('phoneForm').style.display = 'block';
-        }; */
+        };
 
         document.getElementById('confirmAddToCartBtn').onclick = function () {
             const quantity = document.getElementById('quantity').value;
             const phoneNumber = document.getElementById('phoneNumber').value;
 
-
+            if (phoneNumber) {
+                // Mock API call to send a message
+                fetch('http://localhost:3000/send-message', { // Replace with your actual API endpoint
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        phone: phoneNumber,
+                        message: `Your order for ${quantity} of ${localStorage.getItem('productName')} has been received!`
+                    })
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            alert(`Added ${quantity} of ${localStorage.getItem('productName')} to cart.\nA confirmation message has been sent to ${phoneNumber}.`);
+                        } else {
+                            alert("There was an error sending the message. Please try again."); command
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert("Failed to send the message. Please check your network and try again.");
+                    });
+            } else {
+                alert("Phone number is required for payment.");
+            }
         };
     </script>
 </body>

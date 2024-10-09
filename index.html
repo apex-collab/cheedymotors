@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Headphones Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="products">
+        <h1>CHEEDY MOTORS</h1>
+        <p style="text-align: center;">Explore the best and branded suv's at an affordable price
+        </p>
+        <div class="gallery">
+            <img src="./assets/image01.jpeg" alt="motor 1"
+                onclick="redirectToProduct('Motor 1', 'Description of Motor 1', './assets/image01.jpeg', '$99.99')">
+            <img src="./assets/image02.jpeg" alt="motor 2"
+                onclick="redirectToProduct('Motor 2', 'Description of Motor 2', './assets/image02.jpeg', '$129.99')">
+            <img src="./assets/image03.jpeg" alt="motor 3"
+                onclick="redirectToProduct('Motor 3', 'Description of Motor 3', './assets/image03.jpeg', '$149.99')">
+            <img src="./assets/image04.jpeg" alt="motor 4"
+                onclick="redirectToProduct('Motor 4', 'Description of Motor 4', './assets/image04.jpeg', '$79.99')">
+            <img src="./assets/image01.jpeg" alt="motor 5"
+                onclick="redirectToProduct('Motor 5', 'Description of Motor 5', './assets/image01.jpeg', '$239.99')">
+            <img src="./assets/image02.jpeg" alt="motor 5"
+                onclick="redirectToProduct('Motor 6', 'Description of Motor 6', './assets/image02.jpeg', '$569.99')">
+            <img src="./assets/image03.jpeg" alt="motor 7"
+                onclick="redirectToProduct('Motor 7', 'Description of Motor 7', './assets/image03.jpeg', '$809.99')">
+            <img src="./assets/image04.jpeg" alt="motor 8"
+                onclick="redirectToProduct('Motor 8', 'Description of Motor 8', './assets/image04.jpeg', '$459.99')">
+        </div>
+    </main>
+
+    <div class="par">
+        <p>Looking for a brand new suv, well look no further with warrant lasting at least one year you can get one at an affordable price....come and check in with us or call our help customer service line and get all the support you need. <span>This is CHEEDY MOTORS where your dreams comes to reality</span></p>
+    </div>
+
+    <footer>
+        <p>&copy;All rights reserved.</p>
+    </footer>
+
+    <script>
+        function redirectToProduct(name, description, imageUrl, price) {
+            localStorage.setItem('productName', name);
+            localStorage.setItem('productDescription', description);
+            localStorage.setItem('productImage', imageUrl);
+            localStorage.setItem('productPrice', price);
+            window.location.href = 'checkout.php';
+        }
+    </script>
+</body>
+
+</html>
